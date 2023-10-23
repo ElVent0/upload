@@ -1,18 +1,13 @@
-import { useState, useRef } from "react";
-import { AiFillFile } from "react-icons/ai";
+import { useRef } from "react";
 import ErrorModal from "./components/ErrorModal";
-import { useFileChange } from "./hooks";
+import FilesList from "./components/FilesList";
+import { useFileChange, useErrorModal } from "./hooks";
 
 function App() {
-  const [isErrorModal, setIsErrorModal] = useState(false);
-
-  const handleErrorModal = () => {
-    setIsErrorModal((prev) => !prev);
-  };
-
+  const { isErrorModal, handleErrorModal } = useErrorModal();
   const { files, handleFileChange } = useFileChange(handleErrorModal);
-
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  console.log(files);
 
   return (
     <div className="bg-gray-main h-screen flex flex-col items-center justify-center">
@@ -42,20 +37,7 @@ function App() {
         </div>
       ) : (
         <div className="bg-gray-light w-1200 h-333 mr-auto ml-auto rounded-xl border-8 border-gray-border relative">
-          <ul className="gap-1 w-full h-full flex justify-center items-center">
-            {files.map((item, index) => (
-              <li
-                key={index}
-                className="w-175 h-205 bg-super-gray rounded-xl flex flex-col justify-center items-center"
-              >
-                <AiFillFile className=" text-blue-accent mb-4 text-7xl" />
-                <p className="text-darkest-gray text-center">{item.name}</p>
-                <p className="text-blue-accent text-center italic">
-                  ({(item.size / 1024 ** 2).toFixed(2)}mb)
-                </p>
-              </li>
-            ))}
-          </ul>
+          <FilesList files={files} />
         </div>
       )}
       <ErrorModal
