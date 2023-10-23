@@ -1,7 +1,8 @@
 import { useState, ChangeEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 interface ItemObject {
-  lastModified: string;
+  id: string;
   name: string;
   size: string;
 }
@@ -14,7 +15,7 @@ export const useFileChange = (handleErrorModal: () => void) => {
     if (data) {
       const resultFiles = Object.values(data).map((item) => {
         return {
-          lastModified: item.lastModified.toString(),
+          id: uuidv4().toString(),
           name: item.name,
           size: item.size.toString(),
         };
@@ -28,5 +29,5 @@ export const useFileChange = (handleErrorModal: () => void) => {
     }
   };
 
-  return { files, handleFileChange };
+  return { files, handleFileChange, setFiles };
 };
