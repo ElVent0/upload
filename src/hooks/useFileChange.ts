@@ -1,14 +1,9 @@
 import { useState, ChangeEvent } from "react";
+import { File } from "../interfaces/file";
 import { v4 as uuidv4 } from "uuid";
 
-interface ItemObject {
-  id: string;
-  name: string;
-  size: string;
-}
-
 export const useFileChange = (handleErrorModal: () => void) => {
-  const [files, setFiles] = useState<ItemObject[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const data = e.target.files;
@@ -24,7 +19,6 @@ export const useFileChange = (handleErrorModal: () => void) => {
         handleErrorModal();
         return;
       }
-      console.log(resultFiles);
       setFiles(resultFiles);
     }
   };

@@ -5,14 +5,11 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { File } from "../interfaces/file";
 
 interface FilesListProps {
   id: string;
-  files: {
-    id: string;
-    name: string;
-    size: string;
-  }[];
+  files: File[];
 }
 
 const FilesList: FC<FilesListProps> = ({ id, files }) => {
