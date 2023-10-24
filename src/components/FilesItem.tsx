@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { AiFillFile } from "react-icons/ai";
 import { useSortable } from "@dnd-kit/sortable";
-import { File } from "../interfaces/file";
+import { File } from "../file";
 import { CSS } from "@dnd-kit/utilities";
 
 interface FilesItemProps {

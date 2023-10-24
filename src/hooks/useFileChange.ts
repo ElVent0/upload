@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { File } from "../interfaces/file";
+import { File } from "../file";
 import { v4 as uuidv4 } from "uuid";
 
 export const useFileChange = (handleErrorModal: () => void) => {

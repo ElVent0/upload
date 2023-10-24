@@ -1,6 +1,6 @@
 import { DragEndEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import { File } from "../interfaces/file";
+import { File } from "../file";
 
 export const handleDragEnd = (
   event: DragEndEvent,

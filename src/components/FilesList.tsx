@@ -5,7 +5,7 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { File } from "../interfaces/file";
+import { File } from "../file";
 
 interface FilesListProps {
   id: string;
