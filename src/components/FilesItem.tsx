@@ -8,15 +8,22 @@ interface FilesItemProps {
   item: File;
   files: File[];
   handleDeleteItem: (files: File[], id: string) => void;
+  draggedItemId: string | null;
 }
 
-const FilesItem: FC<FilesItemProps> = ({ item, files, handleDeleteItem }) => {
+const FilesItem: FC<FilesItemProps> = ({
+  item,
+  files,
+  handleDeleteItem,
+  draggedItemId,
+}) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    zIndex: item.id === draggedItemId ? 9999 : 9998,
   };
 
   return (
@@ -25,6 +32,7 @@ const FilesItem: FC<FilesItemProps> = ({ item, files, handleDeleteItem }) => {
       style={style}
       {...attributes}
       {...listeners}
+      id={item.id}
       className="w-175 h-205 bg-super-gray rounded-xl flex flex-col justify-center items-center relative"
     >
       <button

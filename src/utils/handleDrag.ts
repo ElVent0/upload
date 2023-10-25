@@ -1,6 +1,17 @@
-import { DragEndEvent } from "@dnd-kit/core";
+import { DragOverEvent, DragEndEvent } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { File } from "../file";
+
+export const handleDragOver = (
+  event: DragOverEvent,
+  handleDraggedItemId: (id: string) => void
+) => {
+  const { active, over } = event;
+
+  if (active && over) {
+    handleDraggedItemId(String(active.id));
+  }
+};
 
 export const handleDragEnd = (
   event: DragEndEvent,

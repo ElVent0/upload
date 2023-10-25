@@ -11,9 +11,15 @@ interface FilesListProps {
   id: string;
   files: File[];
   handleDeleteItem: (files: File[], id: string) => void;
+  draggedItemId: string | null;
 }
 
-const FilesList: FC<FilesListProps> = ({ id, files, handleDeleteItem }) => {
+const FilesList: FC<FilesListProps> = ({
+  id,
+  files,
+  handleDeleteItem,
+  draggedItemId,
+}) => {
   const { setNodeRef } = useDroppable({
     id,
   });
@@ -34,6 +40,7 @@ const FilesList: FC<FilesListProps> = ({ id, files, handleDeleteItem }) => {
             item={item}
             files={files}
             handleDeleteItem={handleDeleteItem}
+            draggedItemId={draggedItemId}
           />
         ))}
       </ul>

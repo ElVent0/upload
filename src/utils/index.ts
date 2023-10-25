@@ -1,3 +1,3 @@
-import { handleDragEnd } from "./handleDrag";
+import { handleDragOver, handleDragEnd } from "./handleDrag";
 
-export { handleDragEnd };
+export { handleDragOver, handleDragEnd };

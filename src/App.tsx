@@ -2,7 +2,7 @@ import { useState } from "react";
 import ErrorModal from "./components/ErrorModal";
 import FilesList from "./components/FilesList";
 import { useFileChange, useDefaultSensors } from "./hooks";
-import { handleDragEnd } from "./utils";
+import { handleDragOver, handleDragEnd } from "./utils";
 import { DndContext, closestCorners } from "@dnd-kit/core";
 import ButtonUpload from "./components/ButtonUpload";
 
@@ -10,6 +10,11 @@ function App() {
   const [isErrorModal, setIsErrorModal] = useState(false);
   const handleErrorModal = () => {
     setIsErrorModal((prev) => !prev);
+  };
+
+  const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
+  const handleDraggedItemId = (id: string) => {
+    setDraggedItemId(id);
   };
 
   const { files, handleFileChange, setFiles, handleDeleteItem } =
@@ -28,12 +33,14 @@ function App() {
           <DndContext
             sensors={sensors}
             collisionDetection={closestCorners}
+            onDragOver={(e) => handleDragOver(e, handleDraggedItemId)}
             onDragEnd={(e) => handleDragEnd(e, files, setFiles)}
           >
             <FilesList
               id="root"
               files={files}
               handleDeleteItem={handleDeleteItem}
+              draggedItemId={draggedItemId}
             />
           </DndContext>
         </div>
