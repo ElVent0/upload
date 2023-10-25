@@ -1,13 +1,19 @@
+import { useState } from "react";
 import ErrorModal from "./components/ErrorModal";
 import FilesList from "./components/FilesList";
-import { useFileChange, useErrorModal, useDefaultSensors } from "./hooks";
+import { useFileChange, useDefaultSensors } from "./hooks";
 import { handleDragEnd } from "./utils";
 import { DndContext, closestCorners } from "@dnd-kit/core";
-import ButtonComponent from "./components/ButtonComponent";
+import ButtonUpload from "./components/ButtonUpload";
 
 function App() {
-  const { isErrorModal, handleErrorModal } = useErrorModal();
-  const { files, handleFileChange, setFiles } = useFileChange(handleErrorModal);
+  const [isErrorModal, setIsErrorModal] = useState(false);
+  const handleErrorModal = () => {
+    setIsErrorModal((prev) => !prev);
+  };
+
+  const { files, handleFileChange, setFiles, handleDeleteItem } =
+    useFileChange(handleErrorModal);
   const sensors = useDefaultSensors();
 
   return (
@@ -15,8 +21,8 @@ function App() {
       <h1 className="text-center mb-8 font-extrabold text-3xl text-darkest-gray">
         Test
       </h1>
-      {files.length === 0 ? (
-        <ButtonComponent handleFileChange={handleFileChange} />
+      {!files.length ? (
+        <ButtonUpload handleFileChange={handleFileChange} />
       ) : (
         <div className="bg-gray-light w-1200 h-333 mr-auto ml-auto rounded-xl border-8 border-gray-border relative">
           <DndContext
@@ -24,7 +30,11 @@ function App() {
             collisionDetection={closestCorners}
             onDragEnd={(e) => handleDragEnd(e, files, setFiles)}
           >
-            <FilesList id="root" files={files} />
+            <FilesList
+              id="root"
+              files={files}
+              handleDeleteItem={handleDeleteItem}
+            />
           </DndContext>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const ButtonComponent = ({
+const ButtonUpload = ({
   handleFileChange,
 }: {
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -31,4 +31,4 @@ const ButtonComponent = ({
   );
 };
 
-export default ButtonComponent;
+export default ButtonUpload;

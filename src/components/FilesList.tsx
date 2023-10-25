@@ -10,9 +10,10 @@ import { File } from "../file";
 interface FilesListProps {
   id: string;
   files: File[];
+  handleDeleteItem: (files: File[], id: string) => void;
 }
 
-const FilesList: FC<FilesListProps> = ({ id, files }) => {
+const FilesList: FC<FilesListProps> = ({ id, files, handleDeleteItem }) => {
   const { setNodeRef } = useDroppable({
     id,
   });
@@ -28,7 +29,12 @@ const FilesList: FC<FilesListProps> = ({ id, files }) => {
         className="gap-1 w-full h-full flex justify-center items-center"
       >
         {files.map((item) => (
-          <FilesItem key={item.id} item={item} />
+          <FilesItem
+            key={item.id}
+            item={item}
+            files={files}
+            handleDeleteItem={handleDeleteItem}
+          />
         ))}
       </ul>
     </SortableContext>
